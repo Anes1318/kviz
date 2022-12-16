@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:kviz/components/dugme.dart';
 import 'package:kviz/components/pitanje.dart';
@@ -29,6 +31,7 @@ class _HomeState extends State<Home> {
       odgovor4: '8',
     )
   ];
+  int x = 0;
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -48,7 +51,7 @@ class _HomeState extends State<Home> {
                       color: Colors.grey.shade400,
                       borderRadius: BorderRadius.circular(5)),
                   child: Text(
-                    '${pitanja[1].pitanje}',
+                    '${pitanja[x].pitanje}',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -56,11 +59,28 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 30,
               ),
-              Dugme(),
-              Dugme(),
-              Dugme(),
-              Dugme(),
-              Dugme(),
+              Dugme(
+                odgovor: pitanja[x].odgovor1,
+              ),
+              Dugme(
+                odgovor: pitanja[x].odgovor2,
+              ),
+              Dugme(
+                odgovor: pitanja[x].odgovor3,
+              ),
+              Dugme(
+                odgovor: pitanja[x].odgovor4,
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  setState(
+                    () {
+                      x = Random().nextInt(2);
+                    },
+                  );
+                },
+              ),
+              Text('$x'),
             ],
           ),
         ),
