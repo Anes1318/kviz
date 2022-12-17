@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Dugme extends StatefulWidget {
-  final String odgovor;
+  String odgovor;
 
-  Dugme({super.key, required this.odgovor});
+  VoidCallback kliknuliDugme;
+
+  Dugme({super.key, required this.odgovor, required this.kliknuliDugme});
 
   @override
   State<Dugme> createState() => _DugmeState();
@@ -14,8 +16,12 @@ class _DugmeState extends State<Dugme> {
   Widget build(BuildContext context) {
     return Container(
       child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(backgroundColor: Colors.lightBlue),
+        onPressed: () {
+          widget.kliknuliDugme();
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.lightBlue,
+        ),
         child: Text(
           '${widget.odgovor}',
           style: TextStyle(
