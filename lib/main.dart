@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  List<Pitanje> pitanja = [
+  static List<Pitanje> pitanja = [
     Pitanje(
       pitanje: 'Koje godine je umro Josip Broz Tito?',
       tacanOdgovor: '1980',
@@ -45,21 +45,67 @@ class _HomeState extends State<Home> {
       odgovor2: '2008',
       odgovor3: '1998',
     ),
+    Pitanje(
+      pitanje:
+          'Koje godine je Titanik potonuo u Atlantskom okeanu 15. aprila, djevičanskim putovanjem iz Sautemptona?',
+      tacanOdgovor: '1912',
+      odgovor1: '1916',
+      odgovor2: '1918',
+      odgovor3: '1917',
+    ),
+    Pitanje(
+      pitanje: 'Koliko udisaja dnevno uzima ljudsko tijelo?',
+      tacanOdgovor: '20000 dnevno',
+      odgovor1: '10000 dnevno',
+      odgovor2: '50000 dnevno',
+      odgovor3: '100000 dnevno',
+    ),
+    Pitanje(
+      pitanje:
+          'Što je u vizitkarti Al Caponea navedeno da je njegovo zanimanje?',
+      tacanOdgovor: 'Prodavac polovnog namestaja',
+      odgovor1: 'Pekar',
+      odgovor2: 'Kasir u marketu',
+      odgovor3: 'Čistač snijega',
+    ),
+    Pitanje(
+      pitanje: 'Kako se zove najveća tehnološka kompanija u Južnoj Koreji?',
+      tacanOdgovor: 'Samsung',
+      odgovor1: 'Xiaomi',
+      odgovor2: 'Apple',
+      odgovor3: 'Huawei',
+    ),
+    Pitanje(
+      pitanje: 'Koja je najmanja ptica na svijetu?',
+      tacanOdgovor: 'Kolibri',
+      odgovor1: 'Vrabac',
+      odgovor2: 'Detlić',
+      odgovor3: 'Bjelovrata muharica',
+    ),
   ];
 
-  int x = 0;
+  int x = Random().nextInt(pitanja.length);
   int mijenjanje(x) {
-    x = Random().nextInt(4);
+    int starox = x;
+    x = Random().nextInt(pitanja.length);
+    while (x == starox) {
+      print('$x == starox $starox');
+      x = Random().nextInt(pitanja.length);
+      print('novo x = $x');
+    }
+
     return x;
   }
 
   bool tacno = false;
   bool antiTacno = false;
-  String hashirama = 'tacanOdgovor';
+
+  bool buttonDisabled = true;
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        // floatingActionButton: FloatingActionButton(onPressed: broji),
         backgroundColor: Colors.white60,
         body: SafeArea(
           child: Column(
@@ -88,7 +134,7 @@ class _HomeState extends State<Home> {
                 kliknuliDugme: () {
                   setState(() {
                     tacno = true;
-                    print('PITE');
+
                     Timer(Duration(milliseconds: 1300), () {
                       setState(() {
                         tacno = false;
@@ -103,7 +149,7 @@ class _HomeState extends State<Home> {
                 kliknuliDugme: () {
                   setState(() {
                     antiTacno = true;
-                    print('PITE');
+
                     Timer(Duration(milliseconds: 1300), () {
                       setState(() {
                         antiTacno = false;
@@ -118,7 +164,7 @@ class _HomeState extends State<Home> {
                 kliknuliDugme: () {
                   setState(() {
                     antiTacno = true;
-                    print('PITE');
+
                     Timer(Duration(milliseconds: 1300), () {
                       setState(() {
                         antiTacno = false;
@@ -133,7 +179,7 @@ class _HomeState extends State<Home> {
                 kliknuliDugme: () {
                   setState(() {
                     antiTacno = true;
-                    print('PITE');
+
                     Timer(Duration(milliseconds: 1300), () {
                       setState(() {
                         antiTacno = false;
