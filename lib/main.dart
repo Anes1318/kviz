@@ -85,6 +85,7 @@ class _HomeState extends State<Home> {
   ];
 
   int x = Random().nextInt(pitanja.length);
+
   int mijenjanje(x) {
     int starox = x;
     x = Random().nextInt(pitanja.length);
@@ -97,11 +98,26 @@ class _HomeState extends State<Home> {
     return x;
   }
 
+  List<String> nesto = [
+    'tacanOdgovor',
+    'odgovor1',
+    'odgovor2',
+    'odgovor3',
+  ];
+
   bool tacno = false;
   bool antiTacno = false;
-
-  bool buttonDisabled = true;
+  int jedan = 1;
+  bool buttonDisabled = false;
   Widget build(BuildContext context) {
+    List<String> odgovori = [
+      pitanja[x].tacanOdgovor,
+      pitanja[x].odgovor1,
+      pitanja[x].odgovor2,
+      pitanja[x].odgovor3
+    ];
+    odgovori.shuffle();
+    x = mijenjanje(x);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -130,61 +146,86 @@ class _HomeState extends State<Home> {
                 height: 30,
               ),
               Dugme(
-                odgovor: pitanja[x].tacanOdgovor,
+                odgovor: odgovori[0],
                 kliknuliDugme: () {
                   setState(() {
-                    tacno = true;
+                    if (odgovori[0] == pitanja[x].tacanOdgovor) {
+                      print('Odgovori[0] = ${odgovori[0]}');
+                      print(
+                          'Pitanja[x].tacanOdgovor = ${pitanja[x].tacanOdgovor}');
+                      print('Tacno');
+                      tacno = true;
+                    } else {
+                      print('Odgovori[0] = ${odgovori[0]}');
+                      print(
+                          'Pitanja[x].tacanOdgovor = ${pitanja[x].tacanOdgovor}');
+                      print('AntiTacno');
 
-                    Timer(Duration(milliseconds: 1300), () {
+                      antiTacno = true;
+                    }
+
+                    Timer(Duration(milliseconds: 2000), () {
                       setState(() {
                         tacno = false;
+                        antiTacno = false;
                       });
-                      x = mijenjanje(x);
                     });
                   });
                 },
               ),
               Dugme(
-                odgovor: pitanja[x].odgovor1,
+                odgovor: odgovori[1],
                 kliknuliDugme: () {
                   setState(() {
-                    antiTacno = true;
+                    if (odgovori[1] == pitanja[x].tacanOdgovor) {
+                      tacno = true;
+                    } else {
+                      antiTacno = true;
+                    }
 
-                    Timer(Duration(milliseconds: 1300), () {
+                    Timer(Duration(milliseconds: 2000), () {
                       setState(() {
+                        tacno = false;
                         antiTacno = false;
                       });
-                      x = mijenjanje(x);
                     });
                   });
                 },
               ),
               Dugme(
-                odgovor: pitanja[x].odgovor2,
+                odgovor: odgovori[2],
                 kliknuliDugme: () {
                   setState(() {
-                    antiTacno = true;
+                    if (odgovori[2] == pitanja[x].tacanOdgovor) {
+                      tacno = true;
+                    } else {
+                      antiTacno = true;
+                    }
 
-                    Timer(Duration(milliseconds: 1300), () {
+                    Timer(Duration(milliseconds: 2000), () {
                       setState(() {
+                        tacno = false;
                         antiTacno = false;
                       });
-                      x = mijenjanje(x);
                     });
                   });
                 },
               ),
               Dugme(
-                odgovor: pitanja[x].odgovor3,
+                odgovor: odgovori[3],
                 kliknuliDugme: () {
                   setState(() {
-                    antiTacno = true;
+                    if (odgovori[3] == pitanja[x].tacanOdgovor) {
+                      tacno = true;
+                    } else {
+                      antiTacno = true;
+                    }
 
-                    Timer(Duration(milliseconds: 1300), () {
+                    Timer(Duration(milliseconds: 2000), () {
                       setState(() {
+                        tacno = false;
                         antiTacno = false;
                       });
-                      x = mijenjanje(x);
                     });
                   });
                 },
